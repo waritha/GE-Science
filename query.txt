@@ -1,0 +1,62 @@
+SELECT SUM(G.ge_hour) 
+FROM  activity A, ge_activity G, mapping_ge_activity M
+WHERE A.activity_id = M.activity_id and M.ge_id = G.ge_id
+and A.activity_id = 10
+
+
+
+
+SELECT SUM(G.ge_hour) 
+FROM  activity A, ge_activity G, mapping_ge_activity M,participation P
+WHERE A.activity_id = M.activity_id and M.ge_id = G.ge_id  and P.activity_id = A.activity_id
+and P.student_id = '550510555' and P.join_status = 1
+
+
+<?php
+        $result_dept = $mysqli->query("SELECT * FROM department");
+        ?>
+        <label ><strong>ภาควิชา/สังกัด</strong></label>
+        <!-- <select name="student_dept" >
+          <option value="ภาควิชาชีววิทยา" >ภาควิชาชีววิทยา</option>
+          <option value="ภาควิชาเคมี" >ภาควิชาเคมี</option>
+          <option value="ภาควิชาธรณีวิทยา" >ภาควิชาธรณีวิทยา</option>
+          <option value="ภาควิชาฟิสิกส์และวัสดุศาสตร์" >ภาควิชาฟิสิกส์และวัสดุศาสตร์</option>
+          <option value="ภาควิชาเคมีอุตสาหกรรม" >ภาควิชาเคมีอุตสาหกรรม</option>
+          <option value="ภาควิชาคณิตศาสตร์" >ภาควิชาคณิตศาสตร์</option>
+          <option value="ภาควิชาสถิติ" >ภาควิชาสถิติ</option>
+          <option value="ภาควิชาวิทยาการคอมพิวเตอร์" >ภาควิชาวิทยาการคอมพิวเตอร์</option>
+          <option value="สาขาวิชาวิทยาศาสตร์สิ่งแวดล้อม" >สาขาวิชาวิทยาศาสตร์สิ่งแวดล้อม</option>
+          <option value="สโมสรนักศึกษา" >สโมสรนักศึกษา</option>
+        </select> -->
+        <select name="student_dept" >
+           <?php while ($row = $result_dept->fetch_assoc()) {
+              echo"<option value='".$row["dept_id"]."' >".$row["dept_name"]."</option>";
+            }
+          ?>
+        </select> 
+
+
+//student.php
+$users = DB::select("SELECT S.*,D.*,P.*
+	FROM student S,department D ,p_status P
+	WHERE S.student_dept = D.dept_id and S.p_status = P.p_status_id");
+
+
+	<td><?php echo $user->student_id; ?></td>
+        <td><?php   echo $user->first_name;?></td>
+        <td><?php   echo $user->last_name;?></td>
+        <td><?php   echo $user->year_reg;?></td>
+        <td><?php   echo $user->semester_ge;?></td>
+        <td><?php   echo $user->p_status_name;?></td>
+        <td><?php   echo $user->dept_name;?></td>
+        
+
+//result_search_student
+<?php
+$users = DB::select("SELECT S.*,D.*,P.*
+	FROM student S,department D ,p_status P
+	WHERE S.student_dept = D.dept_id and S.p_status = P.p_status_id and 
+		(S.student_id LIKE '%".$keyword."%' or 
+		S.first_name  LIKE '%".$keyword."%' or 
+		S.last_name   LIKE '%".$keyword."%')");
+?>
