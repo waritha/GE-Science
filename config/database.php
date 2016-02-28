@@ -54,42 +54,22 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => 'localhost',
-            'database' => env('DB_DATABASE', 'mysql_ge'), // ชื่อ Database ที่ต้องการเชื่อมต่อ
-            'username' => 'root', // Mysql Username
-            'password' =>  '',// Mysql Password
+            'host' => env('DB_HOST', 'localhost'),,
+            'database' => env('DB_DATABASE', 'mysql_ge_science'), // ชื่อ Database ที่ต้องการเชื่อมต่อ
+            'username' => env('DB_USERNAME', 'root'), // Mysql Username
+            'password' =>  env('DB_PASSWORD', ''),// Mysql Password
             'charset' => 'utf8',
             'collation' => 'utf8_general_ci',
             'prefix' => '',
             'strict' => false,
         ],
 
-/*
-            'mysql' => array(
-                'read' => array(
-                    'host' => 'localhost', // or localhost
-            ),
-            'write' => array(
-                'host' => 'localhost' // or localhost
-            ),
-            'driver'    => 'mysql',
-            'database'  => 'project-2-2015',
-            'username'  => 'root',
-            'password'  => '', // or 1234
-            'charset'   => 'utf8',
-            'collation' => 'utf8_unicode_ci',
-            'prefix'    => '',
-            ),
-
-*/
-
-
         'pgsql' => [
             'driver'   => 'pgsql',
             'host'     => env('DB_HOST', 'localhost'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'database' => env('DB_DATABASE', 'ge_science'),
+            'username' => env('DB_USERNAME', 'postgres'),
+            'password' => env('DB_PASSWORD', '1234'),
             'charset'  => 'utf8',
             'prefix'   => '',
             'schema'   => 'public',
