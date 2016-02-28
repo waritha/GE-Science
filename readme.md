@@ -3,14 +3,15 @@ Web applecation
 
 ## Requirements
 
-* Mysql 3.*.
-* PHP 5.6.*
-* Laravel 5.1
+* Mysql or PostgreSQL
+* PHP 5.*
+* Laravel 5.*
 * PHP Composer
 
 ### Running Web
 
     >composer install
+    >php artisan key:generate
     >php artisan migrate
     >php artisan serve
 
