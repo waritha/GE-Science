@@ -55,7 +55,7 @@ return [
         'mysql' => [
             'driver' => 'mysql',
             'host' => 'localhost',
-            'database' => 'project-2-2015', // ชื่อ Database ที่ต้องการเชื่อมต่อ
+            'database' => env('DB_DATABASE', 'mysql_ge'), // ชื่อ Database ที่ต้องการเชื่อมต่อ
             'username' => 'root', // Mysql Username
             'password' =>  '',// Mysql Password
             'charset' => 'utf8',
