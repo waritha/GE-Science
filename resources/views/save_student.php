@@ -14,6 +14,9 @@ if ($mysqli->connect_errno) {
 }
 
 	$data_student = $_POST['student'];
+
+	/*$first_name = $_POST['first_name'];
+	$last_name = $_POST['last_name'];*/
 	$year_reg = $_POST['year_reg'];
 	$semester_ge = $_POST['semester_ge'];
 	$student_dept = $_POST['student_dept'];
@@ -34,10 +37,17 @@ if ($mysqli->connect_errno) {
 				'$semester_ge',				
 				'ยังประมวลผลไม่ได้',
 				'$student_dept')");
-		}else{
-			//echo"updated.<br>";
-			$mysqli->query("UPDATE student SET year_reg = '$year_reg',semester_ge = '$semester_ge',p_status = 'ยังประมวลผลไม่ได้', student_dept = '$student_dept' WHERE student_id = '$student_id'");
 		}
+			//echo"updated.<br>";
+			$mysqli->query("UPDATE student SET 
+												first_name = '$student_name',
+												last_name = '$student_lastname',
+												year_reg = '$year_reg',
+												semester_ge = '$semester_ge',
+												p_status = 'ยังประมวลผลไม่ได้', 
+												student_dept = '$student_dept' WHERE student_id = '$student_id'");
+		
+
 
 
 		
