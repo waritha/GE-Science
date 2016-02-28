@@ -10,6 +10,11 @@ Web applecation
 
 ### Running Web
 
+    >cp .env.example .env
+    >cp /config/database.php.example /config/database.php
+
+### Running Web
+
     >composer install
     >php artisan key:generate
     >php artisan migrate
