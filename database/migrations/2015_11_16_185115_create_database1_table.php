@@ -119,6 +119,13 @@ class CreateDatabase1Table extends Migration
 
         });
 
+        Schema::create('p_status',function(Blueprint $table)
+        {
+        $table -> integer('p_status_id',11); 
+        $table -> string('p_status_name' , 20); 
+
+
+        });
 
 
         
