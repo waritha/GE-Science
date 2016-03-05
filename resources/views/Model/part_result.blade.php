@@ -29,10 +29,11 @@
     <!-- กลับไปเพิ่มทีละคนแบบ ธรรมดา
     <a class="btn btn-default" href="{{ url('partselect/'.$act_id) }}" role="button">ลงชื่อเข้าร่วม</a> -->
 
-    <a class="btn btn-default" href="{{ url('part_one/'.$act_id) }}" role="button">เพิ่มรายคน</a>
+    <!-- <a class="btn btn-default" href="{{ url('part_one/'.$act_id) }}" role="button">เพิ่มรายคน</a> -->
     <p>
     <div class="row">
 <table border=0 role="grid" id="table" >
+<b>ตารางแสดงรายละเอียดผู้เข้าร่วมกิจกรรม</b>
     <thead>
         
         <th>รหัสนักศึกษาที่เข้าร่วม</th>

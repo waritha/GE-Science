@@ -41,7 +41,7 @@
 
 <?php
 
-$users = DB::table('activity')->get();
+$users = DB::table('activity')->orderBy('start_date', 'desc')->get();
 foreach($users as $user){
 	?>
 	<tr>
@@ -50,7 +50,7 @@ foreach($users as $user){
 				$activity_id = $user->activity_id;
 			?>
            
-            <a class="btn btn-default" href="{{ url('viewdetail/'.$activity_id) }}" role="button">ดูรายละเอียดเพิ่มเติม</a>
+            <a class="btn btn-default" href="{{ url('viewdetail/'.$activity_id) }}" role="button">ดูรายละเอียดผู้เข้าร่วม</a>
             
 			</td>
 		<td><?php 	echo $user->a_year; ?></td>
@@ -62,9 +62,9 @@ foreach($users as $user){
             <!-- เพิ่มทีละคนแบบธรรมดา
             <a class="btn btn-default" href="{{ url('partselect/'.$activity_id) }}" role="button">รายคน</a> -->
           <!--   เพิ่มทีละคนแบบ jquery และยืนยันก่อนบันทึกจริง -->
-            <a class="btn btn-default" href="{{ url('part_one/'.$activity_id) }}" role="button">รายคน</a>
+            <a class="btn btn-default" href="{{ url('part_one/'.$activity_id) }}" role="button">ลงชื่อเข้าร่วมแบบรายบุคคล</a>
         <!--    <input type="checkbox" value="<?=$activity_id ?>" name="activity_id[]"> -->
-            <a class="btn btn-default" href="{{ url('admin/partexcel') }}" role="button">โหลดจากไฟล์เอ็กเซล</a>
+            <!-- <a class="btn btn-default" href="{{ url('admin/partexcel/'.$activity_id) }}" role="button">โหลดจากไฟล์เอ็กเซล</a> -->
 
 
         </td>
@@ -93,6 +93,9 @@ foreach($users as $user){
 ?>
 	</tr>
 </table>
+<a href="{{ url('admin/partexcel') }}" class="btn btn-default"  role="button">โหลดรายชื่อผู้เข้าร่วมจากไฟล์เอ็กเซล</a>
+
+
 </div>
 <script type="text/javascript">
 $(document).ready(function () {

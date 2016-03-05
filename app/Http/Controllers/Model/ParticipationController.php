@@ -101,6 +101,9 @@ class ParticipationController extends Controller
         
         //dd($student_data);  
         $act_data =$this->arrayMap($act_data);
+
+        $a=0;
+
         $act_data = $act_data[0];
         return view('Model.part_viewdetail')->with("act_data",$act_data);
 
@@ -143,7 +146,7 @@ class ParticipationController extends Controller
             $id = $student['id'];
             $status = $student['status'];
 
-            $sql0 = "SELECT * FROM participation_1 WHERE student_id LIKE '".$id."'";
+            $sql0 = "SELECT * FROM participation_1 WHERE (student_id LIKE '$id' AND activity_id LIKE '$activity_id' )";
             if(count(DB::select($sql0)) <= 0){
 
 
@@ -154,9 +157,9 @@ class ParticipationController extends Controller
                         DB::select($sql1);
         }else{
 
-                    $sql11 = "UPDATE participation_1 SET student_id =  '{$id}',
-                                           activity_id = '{$activity_id}',
-                                           a_status = '{$status}' WHERE activity_id = $part_act_id and student_id = $part_stu_id";
+                    $sql11 = "UPDATE participation_1 SET /*student_id =  '{$id}',
+                                           activity_id = '{$activity_id}',*/
+                                           a_status = '{$status}' WHERE activity_id = $activity_id and student_id = $id";
                                            DB::select($sql11);
                 }
 
@@ -183,45 +186,30 @@ class ParticipationController extends Controller
 
 
 
-    // public function selectpart_search($activity_id,$keyword_stu){
+    public function delpart($student_id,$act_id){
 
-    //     //ส่วนดึงชื่อกิจกรรมที่เลือก
-    //     $sql = "SELECT * FROM activity WHERE activity_id = $activity_id";
-    //     $pct_data = DB::select($sql);
-    //     $pct_data =$this->arrayMap($pct_data);
-    //     $pct_data = $pct_data[0];
+        $std = $student_id;
+        $act = $act_id;
 
-    //     //ส่วนค้นหา
-    //     /*$users = DB::select("SELECT * FROM student WHERE student_id = $student_id AND 
-    //     (student_id LIKE '%".$keyword_stu."%' or 
-    //     first_name  LIKE '%".$keyword_stu."%' or 
-    //     last_name   LIKE '%".$keyword_stu."%')");*/
+        $sql = "DELETE FROM participation_1 WHERE (student_id = $std AND activity_id = $act)";
+        DB::select($sql);
 
-    //     $sql2 = "SELECT * FROM student WHERE student_id = $student_id AND 
-    //     (student_id LIKE '%".$keyword_stu."%' or 
-    //     first_name  LIKE '%".$keyword_stu."%' or 
-    //     last_name   LIKE '%".$keyword_stu."%')";
-    //     $search_data = DB::select($sql2);
-    //     $search_data =$this->arrayMap($search_data);
-    //     $search_data = $search_data[0];
+        $sql12 = "SELECT * FROM activity WHERE activity_id = $act";
+        $act_data = DB::select($sql12);
+
+        
+        //dd($student_data);  
+        $act_data =$this->arrayMap($act_data);
+        $act_data = $act_data[0];
+        return view('Model.part_viewdetail')->with("act_data",$act_data);
 
 
 
-    //     return view('Model.result_search_studentpart')->with("pct_data,keyword_stu",$pct_data,$keyword_stu);
-    //     /*return view('Model.result_search_studentpart')->with("pct_data,search_data",$pct_data,$search_data);*/
 
-    // }
+    }
 
-    // public function result_searchpart($activity_id){
 
-    //     $sql = "SELECT * FROM activity WHERE activity_id = $activity_id";
-    //     $pct_data = DB::select($sql);
-
-    //     $pct_data =$this->arrayMap($pct_data);
-    //     $pct_data = $pct_data[0];
-    //     return view('Model.result_search_studentpart')->with("pct_data",$pct_data);
-
-    // }
+    
 
 
 }
