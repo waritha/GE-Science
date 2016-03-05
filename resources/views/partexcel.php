@@ -10,7 +10,9 @@
 <body>
 
 <?php
-$mysqli = new mysqli("localhost", "root", "", "project-2-2015");
+// $mysqli = new mysqli("localhost", "root", "", "project-2-2015"); itop
+$mysqli = new mysqli(env('DB_HOST', 'localhost'), env('DB_USERNAME', 'root'), env('DB_PASSWORD', ''), env('DB_DATABASE', 'ge_science'));
+
 $mysqli->set_charset("utf8");
 
 
@@ -25,13 +27,13 @@ require_once 'Classes/PHPExcel.php';
 include 'Classes/PHPExcel/IOFactory.php';
 
 
-$inputFileName = "file/".$filename; 
-$inputFileType = PHPExcel_IOFactory::identify($inputFileName);  
-$objReader = PHPExcel_IOFactory::createReader($inputFileType);  
-$objReader->setReadDataOnly(true);  
+$inputFileName = "file/".$filename;
+$inputFileType = PHPExcel_IOFactory::identify($inputFileName);
+$objReader = PHPExcel_IOFactory::createReader($inputFileType);
+$objReader->setReadDataOnly(true);
 
 // Start!!Read fileExcel
-$objPHPExcel = $objReader->load($inputFileName);  
+$objPHPExcel = $objReader->load($inputFileName);
 //print_r($objPHPExcel);
 //$total_sheets=$objPHPExcel->getSheetCount(); //จำนวนไฟล์
 //$allSheetName=$objPHPExcel->getSheetNames(); //ชื่อไฟล์
@@ -53,20 +55,21 @@ for ($row = 8; $row <= $highestRow; ++$row) {
   //print_r($dataRow);
   if ((isset($dataRow[$row]['B'])) && ($dataRow[$row]['B'] > '')) {
     ++$r;
-    
+
     $namedDataArray[$r]= $dataRow[$row];
   }
 
 }
 }
 //print_r($arr_data);
-//print_r($namedDataArray); 
+//print_r($namedDataArray);
 
 //แสดงฐานข้อมูลจากกิจกรรม
-$host="localhost"; // กำหนด host
-$username="root"; // กำหนด username
-$pass_word=""; // กำหนด Password
-$db="project-2-2015"; // กำหนดชื่อฐานข้อมูล
+
+$host=env('DB_HOST', 'localhost'); // กำหนด host
+$username=env('DB_USERNAME', 'root'); // กำหนด username
+$pass_word=env('DB_PASSWORD', ''); // กำหนด Password
+$db=env('DB_DATABASE', 'ge_science'); // กำหนดชื่อฐานข้อมูล
 $Conn = mysql_connect( $host,$username,$pass_word) or die ("ติดต่อฐานข้อมูลไม่ได้");// ติดต่อฐานข้อมูล
 mysql_query("SET NAMES utf8",$Conn); // set กำหนดมาตราฐาน
 mysql_select_db($db) or die("เลือกฐานข้อมูลไม่ได้"); // เลือกฐานข้อมูล
@@ -92,7 +95,7 @@ $result = mysql_query($sql) or die(mysql_error());
     <fieldset>
     <legend>กรุณาเลือกกิจกรรมที่เข้าร่วม</legend>
 
-   
+
     <table width="700" class="searchable" role="grid">
         <thead>
             <th>เลือกกิจกรรม(ได้เพียงกิจกรรมเดียว)</th>
@@ -100,22 +103,22 @@ $result = mysql_query($sql) or die(mysql_error());
             <th>ชื่อกิจกรรม</th>
             <th>สถานที่จัด</th>
             <th>วันที่จัด(ปี-เดือน-วัน)</th>
-            <th>สิ้นสุดวันที่จัด(ปี-เดือน-วัน)</th>       
+            <th>สิ้นสุดวันที่จัด(ปี-เดือน-วัน)</th>
         </thead>
 
-        <?php 
+        <?php
         while($row = mysql_fetch_array($result))
         {
         ?>
         <tr>
-            <td> 
+            <td>
                 <?php
                         $activity_id = $row['activity_id'];
                     ?>
                     <!-- <input class="css_data_item" type="checkbox" value="<?=$activity_id ?>" name="activity_id[]"> -->
                     <input class="css_data_item" type="radio" value="<?=$activity_id ?>" name="activity_id[]"  id="radio" >
 
-                    
+
             </td>
             <td><?php   echo $row['a_year']; ?></td>
             <td><?php   echo $row['a_name']; ?></td>
@@ -123,16 +126,16 @@ $result = mysql_query($sql) or die(mysql_error());
             <td><?php   echo $row['start_date']; ?></td>
             <td><?php   echo $row['finish_date']; ?></td>
 
-          
+
         </tr>
-      <?php 
+      <?php
 }
-?>    
+?>
     </table>
 
 <div class="row">
-     
-         
+
+
     <input type="submit" value="บันทึก" class="button alert" class="right" onclick="check_submit()">
 
 </div>
@@ -140,7 +143,7 @@ $result = mysql_query($sql) or die(mysql_error());
 
 <div class="row">
     <input id="filter" type="text" class="form-control" placeholder="ป้อนคำค้นที่ต้องการ">
-   
+
 </div>
 
 
@@ -219,23 +222,23 @@ $(document).ready(function () {
 });
 
 //new
-$(function(){          
-        
-    $(".css_data_item").click(function(){  // เมื่อคลิก checkbox  ใดๆ    
-        if($(this).prop("checked")==true){ // ตรวจสอบ property  การ ของ     
-            var indexObj=$(this).index(".css_data_item"); //     
-            $(".css_data_item").not(":eq("+indexObj+")").prop( "checked", false ); // ยกเลิกการคลิก รายการอื่น    
-        }    
-    });    
-  
-    $("#form_checkbox1").submit(function(){ // เมื่อมีการส่งข้อมูลฟอร์ม    
-        if($(".css_data_item:checked").length==0){ // ถ้าไม่มีการเลือก checkbox ใดๆ เลย    
-            alert("NO");    
-            return false;       
-        }    
-    });       
-            
-}); 
+$(function(){
+
+    $(".css_data_item").click(function(){  // เมื่อคลิก checkbox  ใดๆ
+        if($(this).prop("checked")==true){ // ตรวจสอบ property  การ ของ
+            var indexObj=$(this).index(".css_data_item"); //
+            $(".css_data_item").not(":eq("+indexObj+")").prop( "checked", false ); // ยกเลิกการคลิก รายการอื่น
+        }
+    });
+
+    $("#form_checkbox1").submit(function(){ // เมื่อมีการส่งข้อมูลฟอร์ม
+        if($(".css_data_item:checked").length==0){ // ถ้าไม่มีการเลือก checkbox ใดๆ เลย
+            alert("NO");
+            return false;
+        }
+    });
+
+});
 
 
 //not null in radio
@@ -250,7 +253,7 @@ if(txt.value != ''){
 
 if (chk.checked==false){
 alert("Hey Man!,u forget check your checkbox");
-}  
+}
 if(rad.checked==false){
 alert("Hey Man!,u forget check your radio button");
 }

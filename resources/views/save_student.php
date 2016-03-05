@@ -4,7 +4,8 @@
 
 <?php
 
-$mysqli = new mysqli("localhost", "root", "", "project-2-2015");
+// $mysqli = new mysqli("localhost", "root", "", "project-2-2015"); itop
+$mysqli = new mysqli(env('DB_HOST', 'localhost'), env('DB_USERNAME', 'root'), env('DB_PASSWORD', ''), env('DB_DATABASE', 'ge_science'));
 $mysqli->set_charset("utf8");
 
 /* check connection */
@@ -34,23 +35,23 @@ if ($mysqli->connect_errno) {
 				'$student_name',
 				'$student_lastname',
 				'$year_reg',
-				'$semester_ge',				
+				'$semester_ge',
 				'ยังประมวลผลไม่ได้',
 				'$student_dept')");
 		}
 			//echo"updated.<br>";
-			$mysqli->query("UPDATE student SET 
+			$mysqli->query("UPDATE student SET
 												first_name = '$student_name',
 												last_name = '$student_lastname',
 												year_reg = '$year_reg',
 												semester_ge = '$semester_ge',
-												p_status = 'ยังประมวลผลไม่ได้', 
+												p_status = 'ยังประมวลผลไม่ได้',
 												student_dept = '$student_dept' WHERE student_id = '$student_id'");
-		
 
 
 
-		
+
+
 	}
 
 
