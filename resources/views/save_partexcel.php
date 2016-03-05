@@ -4,7 +4,8 @@
 
 <?php
 
-$mysqli = new mysqli("localhost", "root", "", "project-2-2015");
+// $mysqli = new mysqli("localhost", "root", "", "project-2-2015"); itop
+$mysqli = new mysqli(env('DB_HOST', 'localhost'), env('DB_USERNAME', 'root'), env('DB_PASSWORD', ''), env('DB_DATABASE', 'ge_science'));
 $mysqli->set_charset("utf8");
 
 /* check connection */
@@ -41,7 +42,7 @@ if ($mysqli->connect_errno) {
 		/*$mysqli->query ("INSERT INTO participation_1 VALUES ('$student_id','$activity_id','ผู้เข้าร่วมกิจกรรม')");*/
 		$mysqli->query ("UPDATE participation_1 SET a_status = 'ผู้เข้าร่วมกิจกรรม' WHERE student_id = '$student_id' and activity_id ='$activity_id'");
 			//echo"updated.<br>";
-			/*$mysqli->query("UPDATE participation_1 SET 
+			/*$mysqli->query("UPDATE participation_1 SET
 												a_status = '$a_status' WHERE student_id = '$student_id' and activity_id ='$activity_id'");
 		*/
 			}

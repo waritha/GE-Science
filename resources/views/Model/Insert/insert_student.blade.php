@@ -42,6 +42,7 @@
 		</div>
 
 <?php
+  // $mysqli = new mysqli("localhost", "root", "", "project-2-2015"); itop
 	$mysqli = new mysqli(env('DB_HOST', 'localhost'), env('DB_USERNAME', 'root'), env('DB_PASSWORD', ''), env('DB_DATABASE', 'ge_science'));
 	$mysqli->set_charset("utf8");
 ?>

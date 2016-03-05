@@ -10,7 +10,8 @@
 <body>
 
 <?php
-$mysqli = new mysqli("localhost", "root", "", "project-2-2015");
+// $mysqli = new mysqli("localhost", "root", "", "project-2-2015"); itop
+$mysqli = new mysqli(env('DB_HOST', 'localhost'), env('DB_USERNAME', 'root'), env('DB_PASSWORD', ''), env('DB_DATABASE', 'ge_science'));
 $mysqli->set_charset("utf8");
 
 
@@ -24,13 +25,13 @@ require_once 'Classes/PHPExcel.php';
 include 'Classes/PHPExcel/IOFactory.php';
 
 
-$inputFileName = "file/".$filename; 
-$inputFileType = PHPExcel_IOFactory::identify($inputFileName);  
-$objReader = PHPExcel_IOFactory::createReader($inputFileType);  
-$objReader->setReadDataOnly(true);  
+$inputFileName = "file/".$filename;
+$inputFileType = PHPExcel_IOFactory::identify($inputFileName);
+$objReader = PHPExcel_IOFactory::createReader($inputFileType);
+$objReader->setReadDataOnly(true);
 
 // Start!!Read fileExcel
-$objPHPExcel = $objReader->load($inputFileName);  
+$objPHPExcel = $objReader->load($inputFileName);
 //print_r($objPHPExcel);
 //$total_sheets=$objPHPExcel->getSheetCount(); //จำนวนไฟล์
 //$allSheetName=$objPHPExcel->getSheetNames(); //ชื่อไฟล์
@@ -52,14 +53,14 @@ for ($row = 8; $row <= $highestRow; ++$row) {
 	//print_r($dataRow);
 	if ((isset($dataRow[$row]['B'])) && ($dataRow[$row]['B'] > '')) {
 		++$r;
-		
+
 		$namedDataArray[$r]= $dataRow[$row];
 	}
 
 }
 }
 //print_r($arr_data);
-//print_r($namedDataArray); 
+//print_r($namedDataArray);
 ?>
 <fieldset>
     <legend>กรุณาเลือกฟล์เอ็กเซลจากสำนักทะเบียน(.xlsx)</legend>
@@ -79,15 +80,15 @@ for ($row = 8; $row <= $highestRow; ++$row) {
     <legend>กรุณากรอกข้อมูลนักศึกษา</legend>
 
 <div class="row">
-    
+
         <label><strong>ปีที่ลงทะเบียน</strong></label>
         <select name="year_reg" >
           <?php for($i=2555;$i<=2560;$i++){?>
           <option value="<?=$i?>" ><?=$i?></option>
           <?php } ?>
         </select>
-    
-    
+
+
         <label><strong>ภาคการศึกษาที่ลงทะเบียนเรียน(1,2,3)</strong></label>
         <select name="semester_ge" >
           <option value="1" >1</option>
@@ -110,15 +111,15 @@ for ($row = 8; $row <= $highestRow; ++$row) {
           <option value="ภาควิชาวิทยาการคอมพิวเตอร์" >ภาควิชาวิทยาการคอมพิวเตอร์</option>
           <option value="สาขาวิชาวิทยาศาสตร์สิ่งแวดล้อม" >สาขาวิชาวิทยาศาสตร์สิ่งแวดล้อม</option>
           <option value="สโมสรนักศึกษา" >สโมสรนักศึกษา</option>
-        </select> 
-        
-    
+        </select>
+
+
     <input type="submit" value="บันทึก" class="button alert" class="right">
 </div>
 
 <div class="row">
     <input id="filter" type="text" class="form-control" placeholder="ป้อนคำค้นที่ต้องการ">
-   
+
 </div>
 
 
