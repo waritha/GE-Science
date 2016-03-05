@@ -18,7 +18,7 @@
 	<form action="{{ url('/add')}}" method="post">
 	<fieldset>
     <legend><strong>เพิ่มข้อมูลนักศึกษา</strong></legend>
-	 <input type="hidden" name="_token" value="{{ csrf_token() }}"> 
+	 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 	<div class="row">
 	    <div class="large-3 columns">
@@ -26,23 +26,23 @@
 			<input type="text" name="student_id" pattern="[0-9]*" minlength="9" maxlenght="10" title="กรุณากรอกตัวเลข 10 หลัก"  />
 		</div>
 	</div>
-	
-	
+
+
 	<div class="row">
 		<div class="large-3 columns">
 			<label><strong>ชื่อ</strong></label>
 			<input type="text" name="first_name" >
 		</div>
-	
 
-	
+
+
 		<div class="large-3 columns">
 		<label><strong>นามสกุล	</strong></label>
 		<input type="text" name="last_name" >
 		</div>
-	
+
 <?php
-	$mysqli = new mysqli("localhost", "root", "", "project-2-2015");
+	$mysqli = new mysqli(env('DB_HOST', 'localhost'), env('DB_USERNAME', 'root'), env('DB_PASSWORD', ''), env('DB_DATABASE', 'ge_science'));
 	$mysqli->set_charset("utf8");
 ?>
 
@@ -91,8 +91,8 @@
         </select>
 		</div>
 
-  	</div>	
-	
+  	</div>
+
 	<div class="row">
 	<input type="submit" class="button" value="ตกลง" > <input type="reset"  class="button" value="รีเซ็ต">
 	</div>

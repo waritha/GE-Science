@@ -55,7 +55,7 @@ return [
         'mysql' => [
             'driver' => 'mysql',
             'host' => env('DB_HOST', 'localhost'),
-            'database' => env('DB_DATABASE', 'mysql_ge_science'), // ชื่อ Database ที่ต้องการเชื่อมต่อ
+            'database' => env('DB_DATABASE', 'ge_science'), // ชื่อ Database ที่ต้องการเชื่อมต่อ
             'username' => env('DB_USERNAME', 'root'), // Mysql Username
             'password' =>  env('DB_PASSWORD', ''),// Mysql Password
             'charset' => 'utf8',
