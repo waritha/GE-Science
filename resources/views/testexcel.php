@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>ทดสอบ</title>
+<title>ไฟล์ลงทะเบียนจากสำนักทะเบียน</title>
 <link rel="stylesheet" href="../../public/foundation/css/foundation.css" />
     <script src="../../public/foundation/js/vendor/modernizr.js"></script>
 </head>

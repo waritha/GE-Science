@@ -1,5 +1,8 @@
 <?php namespace App\Http\Controllers\Admins; // กำหนดที่อยู่ของ Controller
 use App\Http\Controllers\Controller; //เรียกใช้ Controller หลักของ Laravel 5.0
+use Input;
+use DB;
+use Excel;
  
 class FormController extends Controller {
 
@@ -43,7 +46,23 @@ class FormController extends Controller {
  return view('admin.dashboard.joinact');
  }
 
+public function arrayMap($transactions){
+		return array_map(function($object){
+          return (array) $object;
+      }, $transactions);
+	}
+
  public function partexcel(){
+
+ 		/*$sql = "SELECT * FROM activity WHERE activity_id = $activity_id";
+        $act_data = DB::select($sql);
+
+        
+        //dd($student_data);  
+        $act_data =$this->arrayMap($act_data);
+        $act_data = $act_data[0];
+        return view('admin.dashboard.partexcel')->with("act_data",$act_data);*/
+
  return view('admin.dashboard.partexcel');
  }
 

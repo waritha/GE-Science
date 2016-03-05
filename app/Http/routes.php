@@ -21,6 +21,8 @@ Route::get('admin/joinact',"Admins\FormController@joinact");
 
 Route::get('admin/partexcel',"Admins\FormController@partexcel");
 
+/*  EX Route::get('part_one/{activity_id}',"Model\ParticipationController@part_one");*/
+
 //link UI
 Route::get('datastudent', function(){
     return view('Model/student');
@@ -152,6 +154,8 @@ Route::post('addpart/{activity_id}',"Model\ParticipationController@addToPart");
 Route::get('viewdetail/{activity_id}',"Model\ParticipationController@viewdetail");
 
 Route::post('addpart_one/{activity_id}',"Model\ParticipationController@addPartOne");
+
+Route::get('delpart/{student_id}/{act_id}',"Model\ParticipationController@delpart");
 
 
 

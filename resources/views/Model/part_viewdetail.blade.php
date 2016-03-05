@@ -30,14 +30,19 @@
     <!-- กลับไปเพิ่มทีละคนแบบ ธรรมดา
     <a class="btn btn-default" href="{{ url('partselect/'.$act_id) }}" role="button">ลงชื่อเข้าร่วม</a> -->
 
-    <a class="btn btn-default" href="{{ url('part_one/'.$act_id) }}" role="button">เพิ่มรายคน</a>
+   <!--  <a class="btn btn-default" href="{{ url('part_one/'.$act_id) }}" role="button">เพิ่มรายคน</a>
+    
+<a href="{{ url('admin/partexcel') }}" class="btn btn-default"  role="button">โหลดรายชื่อผู้เข้าร่วมจากไฟล์เอ็กเซล</a> -->
+
     <p>
     <div class="row">
 <table border=0 role="grid" id="table" >
+<b>ตารางแสดงรายละเอียดผู้เข้าร่วมกิจกรรม</b>
     <thead>
         
         <th>รหัสนักศึกษาที่เข้าร่วม</th>
         <th>สถานะผู้เข้าร่วมกิจกรรม</th>
+        <th>หมายเหตุ</th>
         
     </thead>
 
@@ -54,6 +59,11 @@ foreach($users as $user){
             <?php echo $user->student_id; ?>
         </td>
         <td><?php echo $user->a_status; ?></td>
+        <td>
+
+             <a class="btn btn-default" href="{{ url('delpart/'.$student_id. '/' .$act_id) }}" role="button" onclick="return confirm('คุณแน่ใจนะว่าต้องการที่จะลบ?')">ลบ</a>
+
+        </td>
 
     </tr>
 
@@ -65,5 +75,6 @@ foreach($users as $user){
 </div>
 
 </fieldset>
+
 </body>
 @stop

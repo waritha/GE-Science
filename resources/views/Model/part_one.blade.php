@@ -34,6 +34,7 @@
 <input id="act_id" type="hidden" name="act_id" value="{{ $act_id }}">
 
 <table  width="650" border="1" cellspacing="2" cellpadding="0">  
+
   <tr>  
     <td>
         <strong>รหัสนักศึกษา</strong>
@@ -44,9 +45,11 @@
    </tr>  
 </table>
 
-
+<input id="submit" type="submit" class="button" value="บันทึก" id="Submit" > <input type="reset"  class="button" value="รีเซ็ต">
+</br>
 <table id="myTbl" width="800" border="1" cellspacing="2" cellpadding="0">
-    <tbody>
+<b>ตารางรายละเอียดผู้เข้าร่วมกิจกรรม</b>
+    <thead>
         <tr>  
             <td >
                <strong>ลำดับ</strong> 
@@ -60,13 +63,9 @@
             <td>
                 <strong>ลบ</strong>
             </td> 
-            <td>
-                <strong>แก้ไข</strong>
-            </td> 
-            <td>
-                <strong>หมายเหตุ</strong>
-            </td> 
-       </tr>  
+             
+       </tr> 
+     </thead>   
   <!-- <tr id="firstTr">   -->
                 <!-- <td>
                 </td>  
@@ -80,7 +79,7 @@
                 </select>
                 </td>   -->
    <!-- </tr>   -->
-   
+   <tbody>
     </tbody>
 </table> 
 
@@ -88,7 +87,7 @@
 
 
 <!-- เข้าฐานข้อมูล -->
-<input id="submit" type="submit" class="button" value="บันทึก" id="Submit" > <input type="reset"  class="button" value="รีเซ็ต">
+<!-- <input id="submit" type="submit" class="button" value="บันทึก" id="Submit" > <input type="reset"  class="button" value="รีเซ็ต"> -->
  
 </form> 
 
@@ -105,9 +104,10 @@
         if (std_id.length == 9) {
             var dropdown = '<select id="dropdown" name="std[' + number + '][status]" ><option value="ผู้เข้าร่วมกิจกรรม" >ผู้เข้าร่วมกิจกรรม</option><option value="ประธาน" >ประธาน</option><option value="ผู้เข้าร่วมกิจกรรม(staff)" >ผู้เข้าร่วมกิจกรรม(staff)</option></select>';
             var inputHidden = '<input type="hidden" name="std[' + number + '][id]" value="' + std_id + '" />';
-            var htmlContent = ' <tr><td>' + (number+1) + '</td><td>' + inputHidden + '<input type="text" name="std[' + number + '][id]" value="' + std_id + '" disabled /></td>  <td>' + dropdown + '</td>  <td><button id="delete" type="button">ลบ</button></td> <td><button id="edit" type="button">แก้ไข</button></td> <td><button id="save" type="button">บันทึก</button></td></tr>';
+            var htmlContent = ' <tr><td>' + (number+1) + '</td><td>' + inputHidden + '<input type="text" name="std[' + number + '][id]" value="' + std_id + '" disabled /></td>  <td>' + dropdown + '</td>  <td><button id="delete" type="button">ลบ</button></td></tr>';
             number++;
-            $('#myTbl tbody').append(htmlContent);
+            $('#myTbl tbody').prepend(htmlContent);
+          
             $('#student_id').val('');
         } else {
             alert('student id less than 9 charecter');
@@ -115,22 +115,24 @@
     });
 
     $(document).on('click', '#delete', function () {
+        confirm('กรุณายืนยันการลบอีกครั้ง !!!')
         $(this).closest('tr').remove();
         return false;
     });
 
-    $(document).on('click', '#edit', function () {
-        $(this).parent().parent().find('input').prop("disabled", false);
-    });
-
-    $(document).on('click', '#save', function () {
-        var temp = $(this).parent().parent().find('input[type=text]').val();
-        $(this).parent().parent().find('input[type=text]').prop("disabled", true);
-        $(this).parent().parent().find('input[type=hidden]').val(temp);
-    });
 </script>
 </html>
 
+<!-- if(confirm(' กรุณายืนยันการลบ '+str+' อีกครั้ง !!! ')){
+return true;
+}else{
+return false;
+}
 
+$(document).on('click', '#delete', function () {
+        $(this).closest('tr').remove();
+        return false;
+    }); -->
 
+  <!--   return confirm('กรุณายืนยันการลบอีกครั้ง !!!')" -->
 @stop
